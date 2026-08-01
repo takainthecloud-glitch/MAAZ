@@ -26,7 +26,7 @@ MAAZ（マーズ）は、**ゼロトラストの成熟度評価と、それが�
 - **Scope（SCF）** — ピラーごとに対象リソースを Y / P / N / NA で評価し、**Scope Coverage Factor** を算出。成熟度が Optimal でも対象範囲が部分的なら攻撃面は残る、という実効カバレッジを反映する（NA は分母から除外）
 - **Threat Map** — 63 技法それぞれについて、AS-IS で緩和済 / TO-BE で新たに緩和 / 未カバー を可視化。代表的な脅威アクターのプロファイル（使用技法つき）も収録
 - **Action Plan** — Quick Win（0–3ヶ月）/ Short-term（3–6ヶ月）/ Strategic（6–12ヶ月）の三層で施策を優先度つきに整理。各アクションには対象レベルの**達成基準**（そのレベルで実装すべきこと）を併記し、各コントロールに対応するソリューションカテゴリ（IDaaS、EDR、DLP、XDR、SOAR 等の一般名称）も表示
-- **CISO Executive Report** — A4 縦（表紙 / サマリ / 現状評価 / ピラー別改善内訳 / 脅威ランドスケープ / ロードマップ / 投資提言 / 付録）を印刷・PDF 保存。ロードマップはアクション件数に応じてページ数が変動します
+- **CISO Executive Report** — A4 縦（表紙 / サマリ / 現状評価 / ピラー別改善内訳 / 脅威ランドスケープ / ロードマップ / 投資提言 / 付録）を印刷・PDF 保存。ロードマップとピラー別改善内訳は内容量に応じてページ数が変動します
 - **入出力** — 評価の保存・再開と下流ツール連携を兼ねた 4 系統
   - **OVERDUE 連携 (JSON)** — 評価全体（AS-IS / TO-BE、脆弱性係数、脅威カバレッジ、アクション）を書き出す標準形式。ZT 負債の投資対効果を試算する [OVERDUE](https://github.com/takainthecloud-glitch/OVERDUE) に渡せる。**JSONインポート**でそのまま読み戻して続きから再開できる
   - **CSF評価連携 (JSON)** — コントロール別の AS-IS / TO-BE と総合ティアに絞った軽量形式。CSF 成熟度側のツールに渡す用途
@@ -40,7 +40,7 @@ MAAZ（マーズ）は、**ゼロトラストの成熟度評価と、それが�
 
 ## 使い方
 
-1. `MAAZ_ztelier_v3_3_0.html`（または `index.html`）をダウンロードする
+1. `MAAZ_ztelier_v3_3_1.html`（または `index.html`）をダウンロードする
 2. ブラウザでファイルを開く
 
 ビルド不要・サーバー不要です。GitHub Pages を有効にした場合は `index.html` がそのまま表示されます。
@@ -53,7 +53,7 @@ Chrome / Edge / Firefox / Safari の最新版。JavaScript を有効にしてく
 
 ## バージョン
 
-- アプリケーション: **v3.3.0**（HTML 内の `const APP_VER` が唯一の版数の出所）
+- アプリケーション: **v3.3.1**（HTML 内の `const APP_VER` が唯一の版数の出所）
 - 準拠フレームワーク: CISA ZTMM v2 / MITRE ATT&CK / MITRE ATLAS
 - 設計システム: Ztelier Edition
 
@@ -61,6 +61,7 @@ Chrome / Edge / Firefox / Safari の最新版。JavaScript を有効にしてく
 
 ### 変更履歴
 
+- **v3.3.1** — CISO Executive Report の「ピラー別改善内訳」が A4 の紙面を超えることがあった問題を修正。内容量に応じて自動改ページするようにした
 - **v3.3.0** — Action Plan と CISO Executive Report の各アクションに、対象レベルの達成基準を併記。あわせて Executive Report のロードマップをアクション件数に応じて自動改ページ
 - **v3.2.1** — 下流ツール連携の記述を整理し、OVERDUE を連携先として明示
 - **v3.2.0** — 初回公開
