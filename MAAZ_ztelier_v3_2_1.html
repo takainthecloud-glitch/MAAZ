@@ -2224,7 +2224,7 @@ const TECHNIQUES = [
 // Phase: recon
 {id:"T1595",name:"アクティブスキャン（Active Scanning）",tactic:"Reconnaissance",phase:"recon",risk:"medium",
   desc:"攻撃者が標的のインフラを直接スキャンし、脆弱なサービス・ポート・バージョン情報を列挙する手法。Nmap/Masscanなどのツールでポートスキャン、バナーグラビング、脆弱性スキャンを実施。脆弱なWebアプリやVPN装置を発見し、初期侵入の足がかりを得る。",
-  tobe:"SSE: インバウンド通信の完全遮断で攻撃面を排除（ZPA等によるアプリ隠蔽）",cat:"SSE",
+  tobe:"SSE: インバウンド通信の完全遮断で攻撃面を排除（ZTNAによるアプリ隠蔽）",cat:"SSE",
   ztAction:"NW-03/AP-03のLv3-4化で攻撃面そのものを排除。外部公開アプリのZTNA化が最優先。"},
 {id:"T1590",name:"被害者ネットワーク情報の収集",tactic:"Reconnaissance",phase:"recon",risk:"medium",
   desc:"攻撃者が標的組織のネットワーク情報（IPレンジ、ドメイン、DNS設定、ネットワーク構成）をOSINTで収集する手法。",
@@ -2248,7 +2248,7 @@ const TECHNIQUES = [
   ztAction:"AP-03 Lv4（インバウンド通信の完全遮断）で根本解決。AP-01 Lv3（動的ポリシー）で補完。"},
 {id:"T1133",name:"外部リモートサービス",tactic:"Initial Access",phase:"recon",risk:"high",
   desc:"VPN、RDP、Citrix等の外部向けリモートアクセスサービスを悪用して侵入する手法。",
-  tobe:"ZTNA: VPN廃止+ゼロトラストアクセス(ZPA)+ユーザーコンテキスト検証",cat:"ZTNA",
+  tobe:"ZTNA: VPN廃止+ゼロトラストアクセス(ZTNA)+ユーザーコンテキスト検証",cat:"ZTNA",
   ztAction:"AP-01 Lv3-4化（VPN→ZTNA移行）が本質。NW-01 Lv3（マイクロセグメンテーション）で横展開を防止。"},
 {id:"T1199",name:"信頼関係の悪用（Trusted Relationship）",tactic:"Initial Access",phase:"recon",risk:"high",
   desc:"サプライヤーやパートナー企業との信頼関係（VPN接続、共有アカウント、API連携）を悪用して標的組織に侵入する手法。",
@@ -2472,7 +2472,7 @@ const TECHNIQUES = [
   ztAction:"NW-01 Lv4（A2A/A2D通信完全制御）。NW-03 Lv4（BERT意図解析）。DE-01 Lv4（AI BOM）。"},
 {id:"AML.T0060",name:"AIエージェントNHI権限悪用",tactic:"Privilege Escalation (AI)",phase:"atlas",risk:"critical",
   desc:"AIエージェントに付与されたNHI（Non-Human Identity）の過剰な権限を悪用する手法。",
-  tobe:"Identity: PAM/ITDRのNHI延伸＋最小権限の動的付与＋ZIAブローカー即遮断",cat:"ZTNA",
+  tobe:"Identity: PAM/ITDRのNHI延伸＋最小権限の動的付与＋SSE/SWGブローカーで即遮断",cat:"ZTNA",
   ztAction:"ID-02 Lv4（NHI完全管理＋エージェントID分離）。CC-01 Lv4（AISPM＋ITDR統合監視）。AP-01 Lv4。"},
 {id:"AML.T0061",name:"エージェントゴールハイジャック",tactic:"Impact (AI)",phase:"atlas",risk:"critical",
   desc:"AIエージェントの目標・タスクを攻撃者の意図した方向にハイジャックする手法。",
@@ -2564,12 +2564,12 @@ const ZTMM_DATA=[
   ["完全TLS1.3対応","全トラフィックの常時インライン検査","BERT意図解析","A2A通信のプロトコルレベル検査","PQC対応検査"]
 ]},
 {pillar:"App & Workload",id:"AP-01",fn:"Access Strategy (アクセス戦略)",
- lv:["IPベースの許可 / VPN経由","ローカル認証 / 基本的RBAC","一元化された認証 / 動的ポリシー","継続的な認可 / 最小特権アクセス(ZPA)"],
+ lv:["IPベースの許可 / VPN経由","ローカル認証 / 基本的RBAC","一元化された認証 / 動的ポリシー","継続的な認可 / 最小特権アクセス(ZTNA)"],
  criteria:[
   ["IPベースのアクセス許可","VPN経由の全面接続","アプリケーション個別認証"],
   ["ローカル認証の一部統合","基本的RBAC","最低限のアクセス制御ポリシー"],
   ["一元化されたIdP認証","動的ポリシー（コンテキストベース）","アプリごとのアクセス制御","VPNの段階的ZTNA置換"],
-  ["継続的認可（セッション中のリスク再評価）","最小特権アクセス（ZPA等）","AIプラットフォームへのZTNA制御","JIT/JEA"]
+  ["継続的認可（セッション中のリスク再評価）","最小特権アクセス（ZTNAブローカー等）","AIプラットフォームへのZTNA制御","JIT/JEA"]
 ]},
 {pillar:"App & Workload",id:"AP-02",fn:"Threat Protection",
  lv:["境界型FWのみ / シグネチャベース","WAF導入 / 定期的なスキャン","振る舞い検知 / サンドボックス連携","AI活用による未知の脅威防御 / BERT意図解析 / XAI出力"],
